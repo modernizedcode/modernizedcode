@@ -211,31 +211,45 @@
       </div>
     </section>
 
-    <section class="section" id="contact">
+        <section class="section" id="contact">
       <div class="container contact-wrap">
         <div class="section-head reveal">
-          <span class="eyebrow">Contact</span>
-          <h2 class="display">A contact page you can keep simple.</h2>
-          <p class="muted">The downloadable payload includes a ready-to-style static form for Web3Forms and notes for keeping Google Forms if you prefer not to switch immediately.</p>
+          <span class="eyebrow">Get in touch</span>
+          <h2 class="display">Let&rsquo;s discuss your modernization challenges.</h2>
+          <p class="muted" style="max-width:60ch;">Every legacy system is different. Share where you are, what&rsquo;s slowing you down, and what a successful outcome looks like&mdash;and I&rsquo;ll come back with a practical perspective on where to start.</p>
         </div>
         <div class="contact-panel card reveal">
+          <div class="contact-options">
+            <div class="option">
+              <h3>What to expect</h3>
+              <p>A straightforward conversation about your specific challenges&mdash;no generic pitch decks. I&rsquo;ll ask about your current stack, your constraints, and what outcomes matter most to your business, then outline a realistic modernization approach.</p>
+            </div>
+            <div class="option">
+              <h3>Typical starting points</h3>
+              <p>Legacy .NET or C# applications that are painful to maintain or deploy. Batch-heavy processes that take minutes when they should take seconds. Third-party dependencies with escalating licensing costs. Systems that need to move to AWS or adopt modern event-driven patterns safely.</p>
+            </div>
+          </div>
           <form class="form-grid" action="https://api.web3forms.com/submit" method="POST">
             <input type="hidden" name="access_key" value="bd6cfe0c-2bfb-4bf8-8cfb-f869ab847ac7">
             <input type="hidden" name="subject" value="New Modernized Code enquiry">
             <input type="hidden" name="from_name" value="Modernized Code Website">
             <div class="field">
-              <label for="name">Name</label>
-              <input id="name" name="name" type="text" placeholder="Your name" required>
+              <label for="name">Your name</label>
+              <input id="name" name="name" type="text" placeholder="Name" required>
             </div>
             <div class="field">
-              <label for="email">Email</label>
+              <label for="email">Work email</label>
               <input id="email" name="email" type="email" placeholder="you@company.com" required>
             </div>
             <div class="field">
-              <label for="message">Project brief</label>
-              <textarea id="message" name="message" placeholder="What are you modernizing, where is the risk, and what outcome matters most?" required></textarea>
+              <label for="company">Company</label>
+              <input id="company" name="company" type="text" placeholder="Where do you work?">
             </div>
-            <button class="btn btn-primary" type="submit">Send enquiry</button>
+            <div class="field">
+              <label for="message">Tell me about your system</label>
+              <textarea id="message" name="message" placeholder="What are you modernizing? What is the current pain point, and what does success look like for your team?" required></textarea>
+            </div>
+            <button class="btn btn-primary" type="submit">Send message</button>
           </form>
         </div>
       </div>
