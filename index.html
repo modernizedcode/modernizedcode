@@ -8,6 +8,11 @@
   <meta property="og:title" content="Modernized Code">
   <meta property="og:description" content="Strategic application modernization, performance engineering, cloud migration, and legacy rescue.">
   <meta property="og:type" content="website">
+    <link rel="icon" type="image/x-icon" href="./assets/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon-32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="./assets/favicon-180.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="./assets/favicon-192.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="./assets/favicon-512.png">
   <link rel="preconnect" href="https://api.fontshare.com">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -208,18 +213,8 @@
           <p class="muted">The downloadable payload includes a ready-to-style static form for Web3Forms and notes for keeping Google Forms if you prefer not to switch immediately.</p>
         </div>
         <div class="contact-panel card reveal">
-          <div class="contact-options">
-            <div class="option">
-              <h3>Recommended: Web3Forms</h3>
-              <p>Replace the placeholder access key with your own and submissions will be delivered to your email without backend code.</p>
-            </div>
-            <div class="option">
-              <h3>Fallback: Google Forms</h3>
-              <p>Keep your existing Google Form by linking to it from the CTA or swapping the form action to your prefilled form endpoint.</p>
-            </div>
-          </div>
           <form class="form-grid" action="https://api.web3forms.com/submit" method="POST">
-            <input type="hidden" name="access_key" value="REPLACE_WITH_YOUR_WEB3FORMS_KEY">
+            <input type="hidden" name="access_key" value="bd6cfe0c-2bfb-4bf8-8cfb-f869ab847ac7">
             <input type="hidden" name="subject" value="New Modernized Code enquiry">
             <input type="hidden" name="from_name" value="Modernized Code Website">
             <div class="field">
@@ -235,7 +230,6 @@
               <textarea id="message" name="message" placeholder="What are you modernizing, where is the risk, and what outcome matters most?" required></textarea>
             </div>
             <button class="btn btn-primary" type="submit">Send enquiry</button>
-            <p class="form-note">To keep Google Forms instead, replace the form block with your current embed or point the main CTA to your existing Google Form URL. The README shows both options.</p>
           </form>
         </div>
       </div>
