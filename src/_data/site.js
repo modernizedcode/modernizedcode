@@ -13,7 +13,6 @@ module.exports = {
     { text: "Services", url: "/services/" },
     { text: "Approach", url: "/approach/" },
     { text: "About", url: "/about/" },
-    { text: "Blog", url: "/blog/" },
     { text: "Contact", url: "/contact/" },
   ],
   social: {

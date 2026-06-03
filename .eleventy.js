@@ -1,4 +1,9 @@
 module.exports = function (eleventyConfig) {
+  // Blog is deferred — keep the source in src/blog/ but don't publish it yet.
+  // To re-enable: delete the next line and re-add the Blog entry to
+  // src/_data/site.js `nav`.
+  eleventyConfig.ignores.add("src/blog");
+
   // Static assets pass straight through to the site root, mirroring the
   // pre-build layout so paths like /site.css and /assets/... keep working.
   eleventyConfig.addPassthroughCopy({ "src/site.css": "site.css" });
