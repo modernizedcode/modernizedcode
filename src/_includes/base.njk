@@ -1,0 +1,243 @@
+{%- set metaTitle = metaTitle or (title + " | " + site.name) -%}
+{%- set metaDescription = description or site.description -%}
+{%- set canonical = site.url + page.url -%}
+{%- set socialImage = site.url + (image or site.ogImage) -%}
+{%- set ogTypeResolved = ogType or "website" -%}
+{%- set isHome = (page.url == "/") -%}
+{%- set crumbs = [{ text: "Home", url: "/" }] -%}
+{%- if parent -%}{%- set crumbs = crumbs.concat([parent]) -%}{%- endif -%}
+{%- if not isHome -%}{%- set crumbs = crumbs.concat([{ text: title, url: page.url }]) -%}{%- endif -%}
+<!DOCTYPE html>
+<html lang="{{ site.lang }}">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Primary SEO -->
+  <title>{{ metaTitle }}</title>
+  <meta name="description" content="{{ metaDescription }}">
+  <meta name="author" content="{{ site.author }}">
+  <meta name="robots" content="{% if noindex %}noindex, nofollow{% else %}index, follow{% endif %}">
+  {%- if keywords %}
+  <meta name="keywords" content="{{ keywords }}">
+  {%- endif %}
+  <link rel="canonical" href="{{ canonical }}">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="{{ ogTypeResolved }}">
+  <meta property="og:url" content="{{ canonical }}">
+  <meta property="og:title" content="{{ metaTitle }}">
+  <meta property="og:description" content="{{ metaDescription }}">
+  <meta property="og:image" content="{{ socialImage }}">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:site_name" content="{{ site.name }}">
+  <meta property="og:locale" content="{{ site.locale }}">
+
+  <!-- Twitter / X Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="{{ canonical }}">
+  <meta name="twitter:title" content="{{ metaTitle }}">
+  <meta name="twitter:description" content="{{ metaDescription }}">
+  <meta name="twitter:image" content="{{ socialImage }}">
+
+  <!-- JSON-LD: site-wide entities -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Person",
+        "@id": "{{ site.url }}/#bharat",
+        "name": "Bharat Hirani",
+        "jobTitle": "Application Modernization Consultant",
+        "description": "Experienced software engineer and consultant specialising in legacy .NET and C# application modernization, cloud migration, and performance engineering.",
+        "url": "{{ site.url }}/",
+        "sameAs": [
+          {{ site.social.linkedin | dump | safe }},
+          {{ site.social.youtube | dump | safe }},
+          {{ site.social.facebook | dump | safe }}
+        ],
+        "address": { "@type": "PostalAddress", "addressLocality": "London", "addressCountry": "GB" },
+        "knowsAbout": [
+          "Application Modernization",
+          "Legacy .NET Transformation",
+          "C# Software Engineering",
+          "Cloud Migration",
+          "Performance Engineering",
+          "Technical Debt Reduction",
+          "Distributed Systems",
+          "Financial Services Technology"
+        ]
+      },
+      {
+        "@type": "ProfessionalService",
+        "@id": "{{ site.url }}/#service",
+        "name": "{{ site.name }}",
+        "url": "{{ site.url }}/",
+        "founder": { "@id": "{{ site.url }}/#bharat" },
+        "description": "Application modernization consultancy specialising in legacy .NET and C# transformation, cloud migration, performance engineering, and technical debt reduction for financial services and enterprise organizations.",
+        "areaServed": "GB",
+        "address": { "@type": "PostalAddress", "addressLocality": "London", "addressCountry": "GB" },
+        "serviceType": [
+          "Application Modernization",
+          "Legacy System Transformation",
+          "Cloud Migration",
+          "Performance Engineering",
+          "Security and Compliance Uplift"
+        ],
+        "sameAs": [ {{ site.social.linkedin | dump | safe }}, {{ site.social.youtube | dump | safe }} ]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "{{ site.url }}/#website",
+        "url": "{{ site.url }}/",
+        "name": "{{ site.name }}",
+        "publisher": { "@id": "{{ site.url }}/#service" },
+        "inLanguage": "{{ site.lang }}"
+      }
+    ]
+  }
+  </script>
+
+  <!-- JSON-LD: this page + breadcrumb -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebPage",
+        "@id": "{{ canonical }}#webpage",
+        "url": {{ canonical | dump | safe }},
+        "name": {{ metaTitle | dump | safe }},
+        "description": {{ metaDescription | dump | safe }},
+        "isPartOf": { "@id": "{{ site.url }}/#website" },
+        "about": { "@id": "{{ site.url }}/#bharat" },
+        "inLanguage": "{{ site.lang }}"
+        {%- if page.date and not isHome %},
+        "dateModified": {{ page.date | isoDate | dump | safe }}
+        {%- endif %}
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": "{{ canonical }}#breadcrumb",
+        "itemListElement": [
+          {%- for c in crumbs %}
+          { "@type": "ListItem", "position": {{ loop.index }}, "name": {{ c.text | dump | safe }}, "item": {{ (site.url + c.url) | dump | safe }} }{% if not loop.last %},{% endif %}
+          {%- endfor %}
+        ]
+      }
+    ]
+  }
+  </script>
+  {%- if structuredData %}
+
+  <!-- JSON-LD: page-specific -->
+  <script type="application/ld+json">
+  {{ structuredData | safe }}
+  </script>
+  {%- endif %}
+
+  <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon-180.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/favicon-192.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="/assets/favicon-512.png">
+  <link rel="preconnect" href="https://api.fontshare.com">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@500,700,800&f[]=satoshi@400,500,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/site.css">
+</head>
+<body>
+  <a class="skip-link" href="#content">Skip to content</a>
+  <header class="site-header">
+    <div class="container">
+      <a class="brand" href="/" aria-label="Modernized Code home">
+        <svg class="brand-mark" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+          <path d="M14 16L2 32l12 16" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M50 16l12 16-12 16" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M38 10L26 54" stroke="currentColor" stroke-width="6" stroke-linecap="round"/>
+        </svg>
+        <span>MODERNIZED CODE</span>
+      </a>
+      <nav class="nav" aria-label="Primary navigation">
+        <button class="menu-toggle show-mobile" data-menu-toggle aria-label="Open menu" aria-expanded="false">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+        </button>
+        <div class="nav-links">
+          {%- for item in site.nav -%}
+          {%- set isActive = (item.url == "/" and isHome) or (item.url != "/" and (page.url | startsWith(item.url))) -%}
+          <a href="{{ item.url }}"{% if isActive %} class="active" aria-current="page"{% endif %}>{{ item.text }}</a>
+          {%- endfor -%}
+        </div>
+      </nav>
+      <button class="theme-toggle" data-theme-toggle aria-label="Switch theme"></button>
+    </div>
+  </header>
+
+  <main id="content">
+    {%- if not isHome and pageHero != false %}
+    <section class="page-hero section">
+      <div class="container">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+          <ol>
+            {%- for c in crumbs %}
+            <li>{% if loop.last %}<span aria-current="page">{{ c.text }}</span>{% else %}<a href="{{ c.url }}">{{ c.text }}</a>{% endif %}</li>
+            {%- endfor %}
+          </ol>
+        </nav>
+        <div class="page-hero-copy reveal">
+          {%- if eyebrow %}<span class="eyebrow">{{ eyebrow }}</span>{% endif %}
+          <h1 class="display">{{ heading or title }}</h1>
+          {%- if lead %}<p class="hero-lead">{{ lead }}</p>{% endif %}
+        </div>
+      </div>
+    </section>
+    {%- endif %}
+    {{ content | safe }}
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <a class="brand" href="/" aria-label="Modernized Code home">
+          <svg class="brand-mark" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+            <path d="M14 16L2 32l12 16" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M50 16l12 16-12 16" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M38 10L26 54" stroke="currentColor" stroke-width="6" stroke-linecap="round"/>
+          </svg>
+          <span>MODERNIZED CODE</span>
+        </a>
+        <p class="footer-tagline">Application modernization, platform renewal, and legacy transformation.</p>
+      </div>
+      <nav class="footer-nav" aria-label="Footer navigation">
+        {%- for item in site.nav %}
+        <a href="{{ item.url }}">{{ item.text }}</a>
+        {%- endfor %}
+      </nav>
+      <div class="footer-social">
+        <p class="footer-social-label">Connect</p>
+        <div class="social-links">
+          <a href="{{ site.social.linkedin }}" target="_blank" rel="noopener noreferrer" aria-label="Bharat Hirani on LinkedIn" class="social-link">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          </a>
+          <a href="{{ site.social.youtube }}" target="_blank" rel="noopener noreferrer" aria-label="Modernized Code on YouTube" class="social-link">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+          </a>
+          <a href="{{ site.social.facebook }}" target="_blank" rel="noopener noreferrer" aria-label="Modernized Code on Facebook" class="social-link">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="footer-copy">
+        <p>&copy; 2026 Modernized Code &mdash; Bharat Hirani. Based in London, England.</p>
+        <a href="#content" class="footer-top">Back to top &uarr;</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/site.js" defer></script>
+</body>
+</html>

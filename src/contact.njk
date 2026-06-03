@@ -1,0 +1,68 @@
+---
+layout: base.njk
+title: Contact
+heading: Let's talk about your system.
+eyebrow: Get in touch
+metaTitle: "Contact — Start a Modernization Conversation | Modernized Code"
+description: "Tell Bharat Hirani where you are, what is slowing you down, and what success looks like. Confidential conversations, responses within one business day."
+lead: "Every legacy estate is different. Tell me where you are, what is slowing you down, and what a successful outcome looks like — and I will come back with a practical perspective on where to start."
+structuredData: |
+  {
+    "@context": "https://schema.org",
+    "@type": "ContactPage",
+    "name": "Contact Modernized Code",
+    "url": "https://www.modernizedcode.com/contact/",
+    "about": { "@id": "https://www.modernizedcode.com/#service" }
+  }
+---
+<section class="section">
+  <div class="container">
+    <div class="contact-cols">
+      <aside class="contact-info reveal">
+        <div class="contact-block">
+          <h3>What to expect</h3>
+          <p>A straightforward conversation about your specific situation — no generic pitch decks. I will ask about your current stack, your constraints, and what outcomes matter most to the business, then outline a realistic path forward.</p>
+        </div>
+        <div class="contact-block">
+          <h3>Common starting points</h3>
+          <ul class="bullets">
+            <li>Legacy .NET or C# applications that are slow, fragile, or expensive to maintain.</li>
+            <li>Batch-heavy processes that take minutes when they should take seconds.</li>
+            <li>Third-party dependencies with escalating licensing costs you would rather not keep paying.</li>
+            <li>Systems that need to move to the cloud or adopt modern event-driven patterns — safely.</li>
+          </ul>
+        </div>
+        <div class="contact-block">
+          <h3>Response time</h3>
+          <p>I respond within one business day. All conversations are confidential.</p>
+        </div>
+      </aside>
+      <div class="contact-form-wrap card reveal">
+        <form class="form-grid" action="https://api.web3forms.com/submit" method="POST">
+          <input type="hidden" name="access_key" value="bd6cfe0c-2bfb-4bf8-8cfb-f869ab847ac7">
+          <input type="hidden" name="subject" value="New Modernized Code enquiry">
+          <input type="hidden" name="from_name" value="Modernized Code Website">
+          <div class="fields-row">
+            <div class="field">
+              <label for="name">Your name</label>
+              <input id="name" name="name" type="text" placeholder="Name" required>
+            </div>
+            <div class="field">
+              <label for="company">Company</label>
+              <input id="company" name="company" type="text" placeholder="Where do you work?">
+            </div>
+          </div>
+          <div class="field">
+            <label for="email">Work email</label>
+            <input id="email" name="email" type="email" placeholder="you@company.com" required>
+          </div>
+          <div class="field">
+            <label for="message">Tell me about your system</label>
+            <textarea id="message" name="message" placeholder="What are you modernizing? What is the current pain point, and what does success look like for your team?" required></textarea>
+          </div>
+          <button class="btn btn-primary" type="submit">Send message</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>

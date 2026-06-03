@@ -1,0 +1,39 @@
+---
+layout: base.njk
+title: Blog
+heading: Notes on modernization.
+eyebrow: Blog
+metaTitle: "Blog — Notes on Legacy .NET Modernization | Modernized Code"
+description: "Practical writing on modernizing legacy .NET and C# systems: the business case, delivery patterns, performance engineering, and lessons from real estates."
+lead: "Practical writing on modernizing legacy systems — the business case, the delivery patterns, and lessons from real estates."
+---
+<section class="section">
+  <div class="container">
+    {%- if collections.posts and collections.posts.length %}
+    <div class="post-list">
+      {%- for post in collections.posts %}
+      <article class="card post-card reveal">
+        <time datetime="{{ post.date | isoDate }}">{{ post.date | readableDate }}</time>
+        <h3><a href="{{ post.url }}">{{ post.data.title }}</a></h3>
+        <p>{{ post.data.description }}</p>
+        <a class="teaser-link" href="{{ post.url }}">Read article &rarr;</a>
+      </article>
+      {%- endfor %}
+    </div>
+    {%- else %}
+    <p class="post-empty reveal">No posts yet — the first articles are on the way. In the meantime, <a href="/contact/" class="kicker">start a conversation</a> about your system.</p>
+    {%- endif %}
+  </div>
+</section>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Blog",
+  "@id": "{{ site.url }}/blog/#blog",
+  "name": "Modernized Code Blog",
+  "url": "{{ site.url }}/blog/",
+  "description": "Practical writing on modernizing legacy .NET and C# systems.",
+  "publisher": { "@id": "{{ site.url }}/#service" }
+}
+</script>
