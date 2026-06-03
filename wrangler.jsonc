@@ -5,6 +5,13 @@
   "observability": {
     "enabled": true
   },
+  // Eleventy builds src/ -> _site/ before wrangler uploads assets. This runs
+  // automatically on `wrangler deploy`/`wrangler dev` and in Cloudflare
+  // Workers Builds (which calls `npx wrangler deploy`), so _site need not be
+  // committed.
+  "build": {
+    "command": "npm run build"
+  },
   "assets": {
     "directory": "_site"
   },
