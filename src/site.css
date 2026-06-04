@@ -185,7 +185,10 @@ input, textarea { font: inherit; color: inherit; }
 .brand span { font-size: var(--text-sm); letter-spacing: .02em; }
 .nav { display: flex; align-items: center; gap: var(--space-4); }
 .nav-links { display: flex; gap: var(--space-4); font-size: var(--text-sm); color: var(--color-text-muted); }
+.nav-links a { position: relative; }
 .nav-links a:hover { color: var(--color-text); }
+.nav-links a.active { color: var(--color-text); }
+.nav-links a.active::after { content: ''; position: absolute; left: 0; right: 0; bottom: -.4rem; height: 2px; border-radius: var(--radius-full); background: var(--color-primary); }
 .theme-toggle { display: inline-flex; align-items: center; justify-content: center; width: 2.75rem; height: 2.75rem; border: 1px solid var(--color-border); border-radius: var(--radius-full); background: var(--color-surface); color: var(--color-text); box-shadow: var(--shadow-sm); }
 .theme-toggle:hover { transform: translateY(-1px); }
 .menu-toggle { display:none; }
@@ -326,3 +329,72 @@ input, textarea { font: inherit; color: inherit; }
 @media (max-width: 540px) { .fields-row { grid-template-columns: 1fr; } }
 
 /* Remove old contact-wrap / contact-panel / contact-options styles as they are replaced */
+
+/* ── Multi-page additions ─────────────────────────────────────────────── */
+
+/* Page hero — the standard header for every non-home page */
+.page-hero { padding-block: clamp(var(--space-10), 7vw, var(--space-16)) var(--space-8); }
+.page-hero-copy { display: grid; gap: var(--space-4); max-width: 70ch; }
+.page-hero h1 { font-size: var(--text-2xl); max-width: 18ch; }
+.page-hero .hero-lead { max-width: 65ch; }
+
+/* Breadcrumb */
+.breadcrumb { margin-bottom: var(--space-6); }
+.breadcrumb ol { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; list-style: none; font: 600 var(--text-xs)/1 var(--font-mono); text-transform: uppercase; letter-spacing: .1em; color: var(--color-text-faint); }
+.breadcrumb li { display: flex; align-items: center; gap: .5rem; }
+.breadcrumb li + li::before { content: '/'; color: var(--color-text-faint); }
+.breadcrumb a { color: var(--color-text-muted); }
+.breadcrumb a:hover { color: var(--color-primary); }
+.breadcrumb [aria-current="page"] { color: var(--color-text); }
+
+/* Section intro spacing tweak when it follows a page hero */
+.page-hero + .section { padding-top: var(--space-4); }
+
+/* Teaser cards on the lean home page */
+.teaser-grid { display: grid; gap: var(--space-4); }
+@media (min-width: 800px) { .teaser-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.teaser { display: grid; gap: var(--space-3); align-content: start; }
+.teaser h3 { font-size: var(--text-lg); font-family: var(--font-display); }
+.teaser p { color: var(--color-text-muted); }
+.teaser-link { margin-top: var(--space-2); font: 700 var(--text-sm)/1 var(--font-mono); color: var(--color-primary); display: inline-flex; align-items: center; gap: .4rem; }
+.teaser:hover .teaser-link { gap: .7rem; }
+
+/* CTA band reused across pages */
+.cta-band { margin-top: var(--space-4); }
+.cta-band .card { display: grid; gap: var(--space-4); text-align: center; justify-items: center; background: linear-gradient(180deg, var(--color-surface), var(--color-surface-2)); padding-block: var(--space-10); }
+.cta-band h2 { font-size: var(--text-xl); font-family: var(--font-display); max-width: 22ch; }
+.cta-band p { color: var(--color-text-muted); max-width: 56ch; }
+
+/* FAQ — native <details> accordion */
+.faq-list { display: grid; gap: var(--space-3); max-width: 760px; }
+.faq-item { border: 1px solid var(--color-border); border-radius: var(--radius-lg); background: var(--color-surface); overflow: hidden; }
+.faq-item summary { display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); padding: var(--space-5); cursor: pointer; font-family: var(--font-display); font-weight: 700; font-size: var(--text-base); list-style: none; }
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary::after { content: '+'; font-family: var(--font-mono); font-size: var(--text-lg); color: var(--color-primary); transition: transform var(--transition-interactive); }
+.faq-item[open] summary::after { transform: rotate(45deg); }
+.faq-item .faq-body { padding: 0 var(--space-5) var(--space-5); color: var(--color-text-muted); }
+
+/* Blog listing */
+.post-list { display: grid; gap: var(--space-4); }
+@media (min-width: 800px) { .post-list { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.post-card { display: grid; gap: var(--space-3); align-content: start; }
+.post-card time { font: 600 var(--text-xs)/1 var(--font-mono); text-transform: uppercase; letter-spacing: .1em; color: var(--color-text-faint); }
+.post-card h3 { font-size: var(--text-lg); font-family: var(--font-display); }
+.post-card p { color: var(--color-text-muted); }
+.post-empty { color: var(--color-text-muted); max-width: 56ch; }
+
+/* Blog post article (prose) */
+.post-article { padding-bottom: var(--space-16); }
+.post-meta { font: 600 var(--text-xs)/1 var(--font-mono); text-transform: uppercase; letter-spacing: .1em; color: var(--color-text-faint); margin-bottom: var(--space-6); }
+.prose { max-width: 70ch; color: var(--color-text); }
+.prose > * + * { margin-top: var(--space-5); }
+.prose h2 { font-family: var(--font-display); font-weight: 700; letter-spacing: -.03em; font-size: var(--text-xl); margin-top: var(--space-10); }
+.prose h3 { font-family: var(--font-display); font-weight: 700; font-size: var(--text-lg); margin-top: var(--space-8); }
+.prose p, .prose li { color: var(--color-text-muted); }
+.prose a { color: var(--color-primary); text-decoration: underline; text-underline-offset: 3px; }
+.prose a:hover { color: var(--color-primary-hover); }
+.prose ul, .prose ol { padding-left: 1.25rem; display: grid; gap: var(--space-2); }
+.prose code { font-family: var(--font-mono); font-size: .9em; background: var(--color-surface-offset); padding: .15rem .4rem; border-radius: .35rem; }
+.prose pre { background: var(--color-surface-offset-2); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: var(--space-4); overflow-x: auto; }
+.prose pre code { background: none; padding: 0; }
+.prose blockquote { border-left: 3px solid var(--color-primary); padding-left: var(--space-4); color: var(--color-text-muted); font-style: italic; }

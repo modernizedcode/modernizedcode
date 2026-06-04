@@ -1,0 +1,17 @@
+{
+  "name": "modernizedcode",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Marketing site for Modernized Code — application modernization consultancy.",
+  "scripts": {
+    "dev": "eleventy --serve",
+    "build": "eleventy",
+    "clean": "node -e \"require('fs').rmSync('_site',{recursive:true,force:true})\"",
+    "preview": "wrangler dev",
+    "deploy": "wrangler deploy"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^3.0.0",
+    "wrangler": "^3.114.0"
+  }
+}
